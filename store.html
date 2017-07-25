@@ -6,12 +6,30 @@
     <script type="text/javascript" src="angular.min.js"></script>
     <script type="text/javascript" src="app.js"></script>
   </head>
-  <body>
-    <h1> {{ "hello" + " Angular!"}}</h1>
-    <div ng-controller="StoreController as store">
-        <h1> Product Name </h1> {{ store.product.name}}
-        <h2> $Product price </h2> {{ store.product.price}}
-        <p> Product Description </p> {{ store.product.description}}
+  <body ng-controller="StoreController as store">
+    <div ng-repeat = "product in store.products">
+        <div ng-hide="product.soldOut">
+            <h1> {{ product.name}} </h1> 
+            <h2> {{ product.price | currency}} </h2> 
+            <p> {{ product.description}} </p> 
+            <button ng-show="product.can_purchase">Add to cart</button>
+        </div>
+    </div>
+    <div ng-controller = "PanelController as panel">
+        <ul>
+            <li ng-class = "{active: panel.isSelected(1)}">
+                <a href ng-click="panel.selectTab(1)">Tab 1 </a>
+
+            </li ng-class = "{active: panel.isSelected(2)}">
+            <li>
+                <a href ng-click="panel.selectTab(2)">Tab 2 </a>
+                
+            </li>
+            <li ng-class = "{active: panel.isSelected(3)}">
+                <a href ng-click="panel.selectTab(3)">Tab 3 </a>
+                
+            </li>
+        </ul>
     </div>
   </body>
 </html>
